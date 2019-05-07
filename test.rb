@@ -15,9 +15,17 @@ File.open(inner, "r:utf-8") do |f|
   p table.length()
   table.headers.each{|w| p w}
 end
+# функция для создания результирующей таблицы
+def add_data_outer  data  
+  # file outer date (key a to add)
+  outer= CSV.open("outer_test.csv","w:utf-8") 
+  outer << data
+  outer.close
+  return outer
+end
+
+data=['test','test2']
+add_data_outer data
 
 
 
-#table_end= CSV.open("test_end.csv","w:utf-8") # key a to add
-#table_end.close
-#file.truncate(f,0) #to wipe all contain file
