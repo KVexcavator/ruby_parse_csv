@@ -1,11 +1,15 @@
 #coding: utf-8
 require 'csv'
-File.open("test.csv", "r:utf-8") do |f|
+
+#входящий файл
+inner="test.csv"
+#примитивный парсинг
+File.open(inner, "r:utf-8") do |f|
   p table=CSV.parse(f, headers: true)
   p table.by_col[1]
   p table.by_row[0]
-  p table[0]["id"]
-  p table[0]["name"]
+  p table[0]["№"]
+  p table[0]["марка"]
   p table.empty?
   p table.size
   p table.length()
