@@ -19,8 +19,11 @@ File.open(inner, "r:utf-8") do |f|
   #table.length()
   head=table.headers
   head_data=[]
+  # нормализация заголовков
   normalize_headers_names head,head_data  
+  #добавить заголовки в новую таблицу
   add_header_data_outer outer,head_data
+  #добавить даные в новую таблицу
   add_data_outer  outer,table
 end
 
