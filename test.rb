@@ -1,31 +1,27 @@
 #coding: utf-8
 require 'csv'
+load 'functions.rb'
 
-#входящий файл
+#имена входящего, результируещего и лог файлов
 inner="test.csv"
-#примитивный парсинг
-File.open(inner, "r:utf-8") do |f|
-  p table=CSV.parse(f, headers: true)
-  p table.by_col[1]
-  p table.by_row[0]
-  p table[0]["№"]
-  p table[0]["марка"]
-  p table.empty?
-  p table.size
-  p table.length()
-  table.headers.each{|w| p w}
-end
-# функция для создания результирующей таблицы
-def add_data_outer  data  
-  # file outer date (key a to add)
-  outer= CSV.open("outer_test.csv","w:utf-8") 
-  outer << data
-  outer.close
-  return outer
-end
+outer="outer_#{inner}"
+loger="loger_#{inner}"
 
-data=['test','test2']
-add_data_outer data
+#примитивный парсинг
+File.open(inner, "r:utf-8") do |f|  
+  table=CSV.parse(f, headers: true)
+  #table.by_col[1]
+  #table.by_row[0]
+  #table[0]["№"]
+  #table[0]["марка"]
+  #table.empty?
+  #table.size
+  #table.length()
+  data=table.headers.each do|w|
+     p w
+  end
+  add_data_outer outer,data
+end
 
 
 
