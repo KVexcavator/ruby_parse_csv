@@ -21,9 +21,7 @@ File.open(inner, "r:utf-8") do |f|
   head_data=[]
   normalize_headers_names head,head_data  
   add_header_data_outer outer,head_data
-  table.by_row.each do|row|
-    add_data_outer  outer,row
-  end
+  add_data_outer  outer,table
 end
 
 

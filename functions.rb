@@ -8,10 +8,12 @@ def add_header_data_outer  outer,data
   return o
 end
 # функция для добавления рядов в результирующгю таблицу
-def add_data_outer  outer,data  
+def add_data_outer  outer,table  
   # file outer date (key a to add)
-  o= CSV.open(outer,"a:utf-8") 
-  o << data
+  o= CSV.open(outer,"a:utf-8")
+  table.by_row.each do|row|
+    o << row
+  end   
   o.close
   return o
 end
