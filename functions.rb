@@ -29,20 +29,20 @@ def normalize_headers_names head,head_data
   pattern_array=get_headers  
   # привести нименнования к стандартным
   pattern_array.each do |subarray|
-    p subarray
     subarray.each do |pattern|
-      #p pattern+"===========================pppppppppppppp"
       head.each do|s|
         inner_string=s.strip.downcase
         if pattern=~ /^#{inner_string}.*/i
-          outer_string=inner_string.gsub(/^#{inner_string}.*/i, pattern)
-          #puts "Совпадение найдено : #{pattern} равен #{inner_string}"
+          outer_string=inner_string.gsub(/^#{inner_string}.*/i, subarray[0])
           head_data<<outer_string
+         
         else
           #puts "Совпадение не найдено для : #{pattern}"
         end
+      
       end   
         
     end
   end
+  head_data.uniq!
 end
