@@ -21,22 +21,28 @@ def add_data_outer  outer,table
 end
 
 # функция приводит неупорядоченные заголовки к стандартным
+# принимпет входящие заголовкм head, и пустой массив head_data для упорядоченных заголоавков
 # возвращает новый ряд с заголовками
 def normalize_headers_names head,head_data
-
-  
-  head.each do|w|
-    # привести нименнования к стандартным
-    w=w.strip.downcase
-    #настройку regex целесобрзно произволить по отдельности
-    w=w.gsub(/№/,"№")
-    w=w.gsub(/^мар.*/,"Марка")
-    w=w.gsub(/^разм.*/,"Размер")
-    w=w.gsub(/^исп.*/,"Исполнение")
-    w=w.gsub(/^напр.*/,"Напряжение")
-    w=w.gsub(/^тех.*/,"ТУ")
-    w=w.gsub(/^гост.*/,"ГОСТ")
-    w=w.gsub(/^цвет.*/,"Цвет")
-    head_data<<w
+  # получить массив образцов строк для распознования и подстановки
+  load "data/list_headers.rb"
+  pattern_array=get_headers  
+  # привести нименнования к стандартным
+  pattern_array.each do |subarray|
+    p subarray
+    subarray.each do |pattern|
+      #p pattern+"===========================pppppppppppppp"
+      head.each do|s|
+        inner_string=s.strip.downcase
+        if pattern=~ /^#{inner_string}.*/i
+          outer_string=inner_string.gsub(/^#{inner_string}.*/i, pattern)
+          #puts "Совпадение найдено : #{pattern} равен #{inner_string}"
+          head_data<<outer_string
+        else
+          #puts "Совпадение не найдено для : #{pattern}"
+        end
+      end   
+        
+    end
   end
 end
