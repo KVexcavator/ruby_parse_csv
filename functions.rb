@@ -1,4 +1,6 @@
 
+
+
 # функция для добавления результирующей таблицы
 def add_header_data_outer  outer,data  
   # file outer date (key a to add)
@@ -21,6 +23,8 @@ end
 # функция приводит неупорядоченные заголовки к стандартным
 # возвращает новый ряд с заголовками
 def normalize_headers_names head,head_data
+
+  
   head.each do|w|
     # привести нименнования к стандартным
     w=w.strip.downcase

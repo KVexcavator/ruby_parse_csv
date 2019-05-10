@@ -2,6 +2,10 @@
 require 'csv'
 load 'functions.rb'
 
+load "data/list_headers.rb"
+headers=get_headers
+p headers[3][3]
+
 #имена входящего, результируещего и лог файлов
 inner="test.csv"
 outer="outer_#{inner}"
