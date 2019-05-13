@@ -28,21 +28,31 @@ def normalize_headers_names head,head_data
   load "data/list_headers.rb"
   pattern_array=get_headers  
   # привести нименнования к стандартным
-  pattern_array.each do |subarray|
-    subarray.each do |pattern|
-      head.each do|s|
-        inner_string=s.strip.downcase
-        if pattern=~ /^#{inner_string}.*/i
-          outer_string=inner_string.gsub(/^#{inner_string}.*/i, subarray[0])
-          head_data<<outer_string
-         
-        else
-          #puts "Совпадение не найдено для : #{pattern}"
-        end
-      
-      end   
-        
+  head.each do |word|
+    #придготовить слово
+    p word
+    p stub=word.strip.downcase.tr('^а-я','')
+    #еайти соответствие
+    pattern_array.each do |array|
+      w=array.grep /^#{stub}.*/i
+      p w
+      head_data<<w[0] unless w.empty?
+      head_data.uniq!
     end
   end
-  head_data.uniq!
+
+
+  # pattern_array.each do |subarray|
+  #   subarray.each do |pattern|
+  #     head.each do|s|
+  #       inner_string=s.strip.downcase
+  #       if pattern =~ /^#{inner_string}.*/i         
+  #         outer_string=inner_string.gsub(/^#{inner_string}.*/i, subarray[0])
+  #         head_data<<outer_string
+  #       end      
+  #     end
+  #   end
+  # end
+
+  #head_data.uniq!
 end
