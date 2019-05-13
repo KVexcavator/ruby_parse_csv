@@ -23,19 +23,19 @@ end
 # функция приводит неупорядоченные заголовки к стандартным
 # принимпет входящие заголовкм head, и пустой массив head_data для упорядоченных заголоавков
 # возвращает новый ряд с заголовками
-def normalize_headers_names head,head_data
+def normalize_headers_names head,head_data,log
   # получить массив образцов строк для распознования и подстановки
   load "data/list_headers.rb"
   pattern_array=get_headers  
   # привести нименнования к стандартным
   head.each do |word|
     #придготовить слово
-    p word
-    p stub=word.strip.downcase.tr('^а-я№','')
+    stub=word.strip.downcase.tr('^а-я№','')
     #еайти соответствие
     pattern_array.each do |array|
       w=array.grep /^#{stub}.*/i  
       if w.empty?
+        log.error("Not find name: #{word} to row: #{array}")
         head_data<<"Not find"
       else
         head_data<<w[0] 
