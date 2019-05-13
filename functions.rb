@@ -43,4 +43,11 @@ def normalize_headers_names head,head_data,log
       head_data.uniq!
     end    
   end
+
+  # функция обрабатывает данные в еолонке Цвет
+  def normalize_colors table
+    p table.by_col[0]
+    p table[0]["Цвет"]
+  end
+
 end

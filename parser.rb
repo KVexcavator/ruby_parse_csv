@@ -15,14 +15,14 @@ log.level = Logger::ERROR
 log.datetime_format='%Y-%m-%d'
 
 #примитивный парсинг
+#table.by_col[0]  
+#table[0]["№"]
+#table[0]["марка"]
+#table.empty?
+#table.size
+#table.length()
 File.open(inner, "r:utf-8") do |f|  
-  table=CSV.parse(f, headers: true)
-  #table.by_col[0]  
-  #table[0]["№"]
-  #table[0]["марка"]
-  #table.empty?
-  #table.size
-  #table.length()
+  table=CSV.parse(f, headers: true)  
   #получить заголовки
   head=table.headers
   head_data=[]
@@ -30,10 +30,16 @@ File.open(inner, "r:utf-8") do |f|
   normalize_headers_names head,head_data,log  
   #добавить заголовки в новую таблицу
   add_header_data_outer outer,head_data
-  # нормализация данных, перебор списков в папке data
-
   #добавить даные в новую таблицу
   add_data_outer  outer,table
+end
+
+# нормализация данных, перебор списков в папке data
+File.open(outer, "a+:utf-8") do |f|
+  table=CSV.parse(f, headers: true) 
+  #нормализация колонки Цвет
+  normalize_colors table
+
 end
 
 
