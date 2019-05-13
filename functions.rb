@@ -30,17 +30,16 @@ def normalize_headers_names head,head_data,log
   # привести нименнования к стандартным
   head.each do |word|
     #придготовить слово
+    unless word.nil?
     stub=word.strip.downcase.tr('^а-я№','')
-    #еайти соответствие
+    else
+      stub='NULL'
+      log.error("Not inter name!")
+    end
+    #найти соответствие
     pattern_array.each do |array|
-      w=array.grep /^#{stub}.*/i  
-      if w.empty?
-        log.error("Not find name: #{word} to row: #{array}")
-        head_data<<"Not find"
-      else
-        head_data<<w[0] 
-      end
-      head_data.uniq!
+      w=array.grep  (/^#{stub}\w*/i) 
+      head_data<<array[0] unless w.empty?
     end
   end
 
