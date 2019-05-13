@@ -31,12 +31,15 @@ def normalize_headers_names head,head_data
   head.each do |word|
     #придготовить слово
     p word
-    p stub=word.strip.downcase.tr('^а-я','')
+    p stub=word.strip.downcase.tr('^а-я№','')
     #еайти соответствие
     pattern_array.each do |array|
-      w=array.grep /^#{stub}.*/i
-      p w
-      head_data<<w[0] unless w.empty?
+      w=array.grep /^#{stub}.*/i  
+      if w.empty?
+        head_data<<"Not find"
+      else
+        head_data<<w[0] 
+      end
       head_data.uniq!
     end
   end
