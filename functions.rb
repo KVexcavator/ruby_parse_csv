@@ -43,19 +43,4 @@ def normalize_headers_names head,head_data,log
       head_data.uniq!
     end    
   end
-
-
-  # pattern_array.each do |subarray|
-  #   subarray.each do |pattern|
-  #     head.each do|s|
-  #       inner_string=s.strip.downcase
-  #       if pattern =~ /^#{inner_string}.*/i         
-  #         outer_string=inner_string.gsub(/^#{inner_string}.*/i, subarray[0])
-  #         head_data<<outer_string
-  #       end      
-  #     end
-  #   end
-  # end
-
-  #head_data.uniq!
 end
