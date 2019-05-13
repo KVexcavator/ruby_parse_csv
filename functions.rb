@@ -33,14 +33,15 @@ def normalize_headers_names head,head_data,log
     unless word.nil?
     stub=word.strip.downcase.tr('^а-я№','')
     else
-      stub='NULL'
+      stub='misstake'
       log.error("Not inter name!")
     end
     #найти соответствие
     pattern_array.each do |array|
       w=array.grep  (/^#{stub}\w*/i) 
       head_data<<array[0] unless w.empty?
-    end
+      head_data.uniq!
+    end    
   end
 
 

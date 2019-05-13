@@ -8,7 +8,7 @@ def get_headers
     ["ТУ","техусловия","техусл","тех"],
     ["ГОСТ","гост"],
     ["Цвет","цв","collor"],
-    ["NULL"]
+    ["<-misstake->","misstake","\s"]
   ]
   return headers
 end
