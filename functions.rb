@@ -57,7 +57,7 @@ def normalize_headers_names head,head_data,log
     pattern_array=get_colors
     for word in table["Цвет"]
       p word+"++++++++++++++++++++++++"
-      p pattern=/^#{prepare_word "colors",word,'^а-яё'}/i
+      p pattern=/#{prepare_word "colors",word,'^а-яё'}/i
       pattern_array.each do |array|
         array.each do |str|
           p str+"^^^^^^^^^^^^^^^^^"
