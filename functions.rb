@@ -42,9 +42,10 @@ def normalize_headers_names head,head_data,log
   pattern_array=get_headers  
   # привести нименнования к стандартным  
   head.each do |word|
-    # опознать принятые данные  
+    # опознать принятые данные
+    pattern_word=/^#{prepare_word "headers",word,'^а-я№'}\w*/i 
     pattern_array.each do |array|
-      w=array.grep  (/^#{prepare_word "headers",word,'^а-я№'}\w*/i) 
+      w=array.grep  (pattern_word) 
       head_data<<array[0] unless w.empty?
       head_data.uniq!
     end    
@@ -54,12 +55,16 @@ def normalize_headers_names head,head_data,log
   def normalize_colors table
     load "data/list_colors.rb"
     pattern_array=get_colors
-    pattern_array.each do |array|
-    #p array[0]
-    pattern="/#{array}/i"
     for word in table["Цвет"]
-      #p word
-    end
+      p word+"++++++++++++++++++++++++"
+      p pattern=/^#{prepare_word "colors",word,'^а-яё'}/i
+      pattern_array.each do |array|
+        array.each do |str|
+          p str+"^^^^^^^^^^^^^^^^^"
+          m = pattern.match(str)
+          p $~
+        end
+      end
     end
   end
 
