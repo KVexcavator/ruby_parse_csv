@@ -1,11 +1,11 @@
 def get_colors
   colors=[
-    ["Синий","син|blue"],
-    ["Красный","красн|крас|red"],
-    ["Зелёный","зелён|зелен|зел|green"],
+    ["Синий","син|иний|blue"],
+    ["Красный","асный|кр|red"],
+    ["Зелёный","елён|зелен|зел|green"],
     ["<-misstake->","misstake","\s"]
   ]
-  return headers
+  return colors
 end
 
 

@@ -15,12 +15,15 @@ log.level = Logger::ERROR
 log.datetime_format='%Y-%m-%d'
 
 #примитивный парсинг
+#table.headers
 #table.by_col[0]  
 #table[0]["№"]
 #table[0]["марка"]
 #table.empty?
 #table.size
 #table.length()
+
+# подготовить исходящий файл
 File.open(inner, "r:utf-8") do |f|  
   table=CSV.parse(f, headers: true)  
   #получить заголовки
