@@ -40,6 +40,9 @@ end
 # нормализация данных, перебор списков в папке data
 File.open(outer, "a+:utf-8") do |f|
   table=CSV.parse(f, headers: true) 
+  p table[2]["Цвет"]
+  table[2]["Цвет"].replace "5555"
+  p table[2]["Цвет"]
   #нормализация колонки Цвет
   normalize_colors table
 
