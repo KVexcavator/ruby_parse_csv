@@ -55,14 +55,14 @@ def normalize_headers_names head,head_data,log
   def normalize_colors table
     load "data/list_colors.rb"
     pattern_array=get_colors
-    for word in table["Цвет"]
-      p word+"++++++++++++++++++++++++"
-      p pattern=/#{prepare_word "colors",word,'^а-яё'}/i
-      pattern_array.each do |array|
-        array.each do |str|
-          p str+"^^^^^^^^^^^^^^^^^"
-          m = pattern.match(str)
-          p $~
+    pattern_array.each do |array|
+      p array
+      array.each do |str| 
+        p str+"sssssssssssssssssssssss" 
+        for word in table["Цвет"]
+          p word="#{prepare_word "colors",word,'^а-яё'} wwwwwwwwwwwww"      
+          m = /#{str}/.match(word)
+          p $~ #,$',$1,$2
         end
       end
     end
