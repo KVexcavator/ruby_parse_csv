@@ -56,16 +56,19 @@ end
   # возвращает колонку с новыми значенмями, колонки надо пересобрать в ряды и добавить в таблицу
 def set_colors table
 p table["Цвет"]
-pattern_array=get_colors
-  pattern_array.each do |array|
-    array.each do |str| 
-      for word in table["Цвет"] 
-        p word          
-        m = /(?<first>#{str})(?<second>.*)?/i.match(prepare_word "colors",word,'^а-яё')
+pattern_array=get_colors  
+  for word in table["Цвет"] 
+    w="#{prepare_word "colors",word,'^а-яё'}" 
+    pattern_array.each do |array|      
+      array.each do |str|          
+        m = /^(?<first>#{str})(?<second>.*)?/i.match(w)
+        if $~!=nil
         p $~
-        if $2.nil? || $2.length<2
-          word.replace array[0]            
-        end
+        p "#{w} - w"
+        p "#{array[0]} - array{0}"
+        p "--------------------------------------"
+        word.replace array[0]
+        end        
       end
     end
   end
