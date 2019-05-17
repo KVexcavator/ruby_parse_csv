@@ -2,6 +2,7 @@
 require 'csv'
 require 'logger'
 load 'functions.rb'
+load "data/list_colors.rb"
 
 
 #имена входящего, результируещего и лог файлов
@@ -36,17 +37,14 @@ File.open(inner, "r:utf-8") do |f|
   #добавить даные в новую таблицу
   add_data_outer  outer,table
 end
-
-# нормализация данных, перебор списков в папке data
-File.open(outer, "a+:utf-8") do |f|
-  table=CSV.parse(f, headers: true) 
-  p table[2]["Цвет"]
-  table[2]["Цвет"].replace "5555"
-  p table[2]["Цвет"]
-  #нормализация колонки Цвет
-  normalize_colors table
-
+# подготовить исходящий файл
+File.open(outer, "r:utf-8") do |f|  
+  table=CSV.parse(f, headers: true)
+  
+  # нормализация данных "Цвет"
+  set_colors table 
 end
+
 
 
 

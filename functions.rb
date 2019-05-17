@@ -53,21 +53,21 @@ def normalize_headers_names head,head_data,log
 end
 
   # функция обрабатывает данные в еолонке Цвет
-  def normalize_colors table
-    load "data/list_colors.rb"
-    pattern_array=get_colors
-    pattern_array.each do |array|
-      array.each do |str| 
-        for word in table["Цвет"]
-          word.replace "555"
-          return word
-          # w="#{prepare_word "colors",word,'^а-яё'}"      
-          # m = /(?<first>#{str})(?<second>.*)?/i.match(w)
-          # if $2.nil? || $2.length<2
-          #   word.replace array[0]
-          #   p word
-          # end
+  # возвращает колонку с новыми значенмями, колонки надо пересобрать в ряды и добавить в таблицу
+def set_colors table
+p table["Цвет"]
+pattern_array=get_colors
+  pattern_array.each do |array|
+    array.each do |str| 
+      for word in table["Цвет"] 
+        p word          
+        m = /(?<first>#{str})(?<second>.*)?/i.match(prepare_word "colors",word,'^а-яё')
+        p $~
+        if $2.nil? || $2.length<2
+          word.replace array[0]            
         end
       end
     end
   end
+  p table["Цвет"]
+end
