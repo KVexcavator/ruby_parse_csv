@@ -63,11 +63,16 @@ pattern_array=get_colors
       array.each do |str|          
         m = /^(?<first>#{str})(?<second>.*)?/i.match(w)
         if $~!=nil
-        p $~
-        p "#{w} - w"
-        p "#{array[0]} - array{0}"
-        p "--------------------------------------"
-        word.replace array[0]
+          p $~
+          p "#{w} - w"
+          p "#{array[0]} - array{0}"
+          p "--------------------------------------"
+          first=array[0].to_s
+          if $2.length>2 || $2=="кр"          
+            word.replace "#{first}-#{$2}"  
+          else
+            word.replace "#{first}"   
+          end   
         end        
       end
     end
