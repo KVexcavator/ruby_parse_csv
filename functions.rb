@@ -52,8 +52,8 @@ def normalize_headers_names head,head_data,log
   end
 end
 
-  # функция обрабатывает данные в еолонке Цвет
-  # возвращает колонку с новыми значенмями, колонки надо пересобрать в ряды и добавить в таблицу
+# функция обрабатывает данные в колонке Цвет
+# возвращает колонку с новыми значенмями, колонки надо пересобрать в ряды и добавить в таблицу
 def set_colors table
 p table["Цвет"]
 pattern_array=get_colors  
@@ -61,19 +61,27 @@ pattern_array=get_colors
     w="#{prepare_word "colors",word,'^а-яё'}" 
     pattern_array.each do |array|      
       array.each do |str|          
-        m = /^(?<first>#{str})(?<second>.*)?/i.match(w)
+        m = /(.{2,})?(#{str})$/i.match(w)
         if $~!=nil
-          p $~
-          p "#{w} - w"
-          p "#{array[0]} - array{0}"
-          p "--------------------------------------"
-          first=array[0].to_s
-          if $2.length>2 || $2=="кр"          
-            word.replace "#{first}-#{$2}"  
-          else
-            word.replace "#{first}"   
-          end   
+          first=$1.to_s
+          second=$2.to_s
+          word.replace "#{first}#{array[0]}" 
+          break 
         end        
+      end
+    end
+  end 
+  # похже отредактировать код на рекурсию
+  table["Цвет"].each do |w|
+    pattern_array.each do |array|      
+      array.each do |str| 
+        m=/(#{str})([[:upper:]].*)/.match(w)
+        if $~!=nil 
+        first=$1.to_s
+        second=$2.to_s
+        w.replace "#{array[0]}-#{second}" 
+        break
+        end
       end
     end
   end
