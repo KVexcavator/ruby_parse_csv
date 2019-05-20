@@ -7,6 +7,7 @@ load "data/list_colors.rb"
 
 #имена входящего, результируещего и лог файлов
 inner="test.csv"
+benefit="benefit.csv"
 outer="outer_#{inner}"
 loger=inner.tr('.','_')+".log"
 
@@ -32,24 +33,25 @@ File.open(inner, "r:utf-8") do |f|
   head_data=[]
   # нормализация заголовков
   normalize_headers_names head,head_data  
-  #добавить заголовки в новую таблицу
+  #добавить заголовки в  таблицу прокладку
+  add_header_data_outer benefit,head_data
+  #добавить даные в таблицу прокладку
+  add_data_outer  benefit,table
+  #добавить заголовки в итоговую таблицу
   add_header_data_outer outer,head_data
-  #добавить даные в новую таблицу
-  add_data_outer  outer,table
 end
 
-# заменить данные в исзодящем файле
-File.open(outer, "r:utf-8") do |f|  
+# добавить  даные в итоговую таблицу
+File.open(benefit, "r:utf-8") do |f|  
   table=CSV.parse(f, headers: true)  
   # нормализация данных "Цвет"
   set_colors table["Цвет"]
-  o= CSV.open(outer,"a:utf-8")
-  table.by_row.each_with_index do|row,i|
-    p row
-    o << row    
-  end   
-  o.close
+  add_data_outer  outer,table  
 end
+# удалить табдицу прокладку
+File.delete(benefit) if File.exist?(outer)
+
+
 
 
 
