@@ -36,7 +36,7 @@ end
 # функция приводит неупорядоченные заголовки к стандартным
 # принимпет входящие заголовкм head, и пустой массив head_data для упорядоченных заголоавков
 # возвращает новый ряд с заголовками
-def normalize_headers_names head,head_data,log
+def normalize_headers_names head,head_data
   # получить массив образцов строк для распознования и подстановки
   load "data/list_headers.rb"
   pattern_array=get_headers  
@@ -54,10 +54,9 @@ end
 
 # функция обрабатывает данные в колонке Цвет
 # возвращает колонку с новыми значенмями, колонки надо пересобрать в ряды и добавить в таблицу
-def set_colors table
-p table["Цвет"]
+def set_colors array_colors
 pattern_array=get_colors  
-  for word in table["Цвет"] 
+  for word in array_colors 
     w="#{prepare_word "colors",word,'^а-яё'}" 
     pattern_array.each do |array|      
       array.each do |str|          
@@ -72,7 +71,7 @@ pattern_array=get_colors
     end
   end 
   # похже отредактировать код на рекурсию
-  table["Цвет"].each do |w|
+  array_colors.each do |w|
     pattern_array.each do |array|      
       array.each do |str| 
         m=/(#{str})([[:upper:]].*)/.match(w)
@@ -85,5 +84,5 @@ pattern_array=get_colors
       end
     end
   end
-  p table["Цвет"]
+  # не оаботает !!!!log.error("Ok!")
 end

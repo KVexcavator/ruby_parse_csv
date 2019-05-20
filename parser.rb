@@ -31,19 +31,26 @@ File.open(inner, "r:utf-8") do |f|
   head=table.headers
   head_data=[]
   # нормализация заголовков
-  normalize_headers_names head,head_data,log  
+  normalize_headers_names head,head_data  
   #добавить заголовки в новую таблицу
   add_header_data_outer outer,head_data
   #добавить даные в новую таблицу
   add_data_outer  outer,table
 end
-# подготовить исходящий файл
+
+# заменить данные в исзодящем файле
 File.open(outer, "r:utf-8") do |f|  
-  table=CSV.parse(f, headers: true)
-  
+  table=CSV.parse(f, headers: true)  
   # нормализация данных "Цвет"
-  set_colors table 
+  set_colors table["Цвет"]
+  o= CSV.open(outer,"a:utf-8")
+  table.by_row.each_with_index do|row,i|
+    p row
+    o << row    
+  end   
+  o.close
 end
+
 
 
 
